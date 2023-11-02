@@ -41,17 +41,18 @@ BufferErrorCode WriteDataToBuffer (Buffer <T> *buffer, const void *data, size_t 
   	custom_assert (buffer, pointer_is_null, BufferErrorCode::NO_BUFFER);
   	custom_assert (data,   pointer_is_null, BufferErrorCode::NO_BUFFER);
 
-  	if (dataSize > buffer->capacity - buffer->currentIndex) {
-		if (buffer->capacity == 0)
-			buffer->capacity = 1;
+	if (buffer->capacity == 0)
+		buffer->capacity = 1;
 
+  	while (dataSize > buffer->capacity - buffer->currentIndex) {
 		buffer->capacity *= 2;
-		buffer->data = (T *) reallocarray (buffer->data, buffer->capacity, sizeof (T));
-
-		if (!buffer->data) {
-			RETURN BufferErrorCode::BUFFER_ENDED;
-		}
   	}
+
+	buffer->data = (T *) reallocarray (buffer->data, buffer->capacity, sizeof (T));
+
+	if (!buffer->data) {
+		RETURN BufferErrorCode::BUFFER_ENDED;
+	}
 
   	for (size_t dataIndex = 0; dataIndex < dataSize; dataIndex++) {
 		buffer->data [buffer->currentIndex++] = ((const T *) data) [dataIndex];
