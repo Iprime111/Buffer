@@ -31,6 +31,8 @@ BufferErrorCode DestroyBuffer 	  (Buffer <T> *buffer);
 template <typename T>
 T *FindValueInBuffer 			  (Buffer <T> *buffer, T *value, comparator_t *comparator);
 
+inline BufferErrorCode WriteStringToBuffer (Buffer <char> *buffer, const char *string);
+
 template <typename T>
 BufferErrorCode WriteDataToBuffer (Buffer <T> *buffer, const void *data, size_t dataSize) {
   	PushLog (4);
@@ -55,6 +57,10 @@ BufferErrorCode WriteDataToBuffer (Buffer <T> *buffer, const void *data, size_t 
 	}
 
   	RETURN BufferErrorCode::NO_BUFFER_ERRORS;
+}
+
+inline BufferErrorCode WriteStringToBuffer (Buffer <char> *buffer, const char *string) {
+	return WriteDataToBuffer (buffer, string, sizeof (string));
 }
 
 template <typename T>
