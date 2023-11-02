@@ -1,0 +1,3 @@
+[submodule "libs/CustomAssert"]
+	path = libs/CustomAssert
+	url = https://github.com/Iprime111/CustomAssert
