@@ -23,6 +23,15 @@ struct Buffer {
 };
 
 template <typename T>
+BufferErrorCode WriteDataToBuffer (Buffer <T> *buffer, const void *data, size_t dataSize);
+template <typename T>
+BufferErrorCode InitBuffer 		  (Buffer <T> *buffer, size_t capacity=0);
+template <typename T>
+BufferErrorCode DestroyBuffer 	  (Buffer <T> *buffer);
+template <typename T>
+T *FindValueInBuffer 			  (Buffer <T> *buffer, T *value, comparator_t *comparator);
+
+template <typename T>
 BufferErrorCode WriteDataToBuffer (Buffer <T> *buffer, const void *data, size_t dataSize) {
   	PushLog (4);
 
