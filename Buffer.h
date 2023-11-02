@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stddef.h>
+#include <string.h>
 
 #include "CustomAssert.h"
 
@@ -60,7 +61,7 @@ BufferErrorCode WriteDataToBuffer (Buffer <T> *buffer, const void *data, size_t 
 }
 
 inline BufferErrorCode WriteStringToBuffer (Buffer <char> *buffer, const char *string) {
-	return WriteDataToBuffer (buffer, string, sizeof (string));
+	return WriteDataToBuffer (buffer, string, strlen (string));
 }
 
 template <typename T>
