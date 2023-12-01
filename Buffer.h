@@ -94,7 +94,7 @@ BufferErrorCode DestroyBuffer (Buffer <T> *buffer) {
 
 template <typename T>
 T *FindValueInBuffer (Buffer <T> *buffer, T *value, comparator_t *comparator) {
-	PushLog (3);
+	PushLog (4);
 
 	custom_assert (buffer, 	   pointer_is_null, NULL);
 	custom_assert (comparator, pointer_is_null, NULL);
@@ -109,5 +109,22 @@ T *FindValueInBuffer (Buffer <T> *buffer, T *value, comparator_t *comparator) {
 	RETURN NULL;
 }
 
+template <typename T>
+BufferErrorCode CopyBuffer (Buffer <T> *source, Buffer <T> *dest) {
+    PushLog (4);
+
+    dest->capacity     = source->capacity;
+    dest->currentIndex = source->currentIndex;
+
+    dest->data = (T *) calloc (source->capacity, sizeof (T));
+
+    if (!dest->data) {
+        RETURN BufferErrorCode::NO_BUFFER;
+    }
+
+    memcpy (dest->data, source->data, source->currentIndex);
+
+    RETURN BufferErrorCode::NO_BUFFER_ERRORS;
+}
 
 #endif
