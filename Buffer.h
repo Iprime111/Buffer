@@ -122,7 +122,7 @@ BufferErrorCode CopyBuffer (Buffer <T> *source, Buffer <T> *dest) {
         RETURN BufferErrorCode::NO_BUFFER;
     }
 
-    memcpy (dest->data, source->data, source->currentIndex);
+    memcpy (dest->data, source->data, source->currentIndex * sizeof (T));
 
     RETURN BufferErrorCode::NO_BUFFER_ERRORS;
 }
