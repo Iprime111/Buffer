@@ -1,6 +1,7 @@
 #ifndef BUFFER_H_
 #define BUFFER_H_
 
+#include <cwchar>
 #include <stdlib.h>
 #include <stddef.h>
 #include <string.h>
@@ -63,6 +64,10 @@ BufferErrorCode WriteDataToBuffer (Buffer <T> *buffer, const void *data, size_t 
 
 inline BufferErrorCode WriteStringToBuffer (Buffer <char> *buffer, const char *string) {
 	return WriteDataToBuffer (buffer, string, strlen (string));
+}
+
+inline BufferErrorCode WriteWstringToBuffer (Buffer <wchar_t> *buffer, const wchar_t *string) {
+    return WriteDataToBuffer (buffer, string, wcslen (string));
 }
 
 template <typename T>
